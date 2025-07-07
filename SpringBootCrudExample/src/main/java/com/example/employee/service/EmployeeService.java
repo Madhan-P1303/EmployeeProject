@@ -78,6 +78,31 @@ public class EmployeeService implements EmployeeServiceInt {
         }
         return response;
     }
+    
+    @Override
+    public EmployeeResponse updateEmployee(Employee employee) {
+        EmployeeResponse response = new EmployeeResponse();
+        try {
+            // Check if employee exists
+            if (employee.getId() != null && employeeRepository.existsById(employee.getId())) {
+                Employee updatedEmployee = employeeRepository.save(employee);
+                response.setResponseStatus(EmployeeEnum.SUCCESS);
+                response.setSuccessMessage("Successfully updated employee");
+                response.setCode(200);
+                response.setData(updatedEmployee);
+            } else {
+                response.setResponseStatus(EmployeeEnum.FAILURE);
+                response.setErrorMessage("Employee not found for update");
+                response.setCode(404);
+            }
+        } catch (Exception e) {
+            response.setResponseStatus(EmployeeEnum.FAILURE);
+            response.setErrorMessage(e.getMessage());
+            response.setCode(500);
+        }
+        return response;
+    }
+
 }
 
     
