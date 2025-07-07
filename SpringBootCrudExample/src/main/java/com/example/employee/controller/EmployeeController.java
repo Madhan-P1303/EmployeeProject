@@ -31,6 +31,11 @@ public class EmployeeController {
         EmployeeResponse response = employeeServiceInt.getEmployeeById(id);
         return ResponseEntity.status(response.getCode()).body(response);
     }
+    @PutMapping("/update")
+    public ResponseEntity<EmployeeResponse> updateEmployee(@RequestBody Employee employee) {
+        EmployeeResponse response = employeeServiceInt.updateEmployee(employee);
+        return ResponseEntity.status(response.getCode()).body(response);
+    }
 
    
 }
