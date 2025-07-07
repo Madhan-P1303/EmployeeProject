@@ -26,22 +26,11 @@ public class EmployeeController {
         EmployeeResponse response = employeeServiceInt.getAllEmployees();
         return ResponseEntity.status(response.getCode()).body(response);
     }
-
     @GetMapping("/fetch/{id}")
     public ResponseEntity<EmployeeResponse> getEmployeeById(@PathVariable("id") String id) {
         EmployeeResponse response = employeeServiceInt.getEmployeeById(id);
         return ResponseEntity.status(response.getCode()).body(response);
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<EmployeeResponse> updateEmployee(@RequestBody Employee employee) {
-        EmployeeResponse response = employeeServiceInt.updateEmployee(employee);
-        return ResponseEntity.status(response.getCode()).body(response);
-    }
-
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<EmployeeResponse> deleteEmployee(@PathVariable("id") String id) {
-        EmployeeResponse response = employeeServiceInt.deleteEmployeeById(id);
-        return ResponseEntity.status(response.getCode()).body(response);
-    }
+   
 }

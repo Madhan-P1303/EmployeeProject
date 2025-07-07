@@ -11,5 +11,6 @@ public interface EmployeeServiceInt {
     public EmployeeResponse createEmployee(Employee employee);
     
     public EmployeeResponse getAllEmployees();
+    public EmployeeResponse getEmployeeById(String id);
  
 }
