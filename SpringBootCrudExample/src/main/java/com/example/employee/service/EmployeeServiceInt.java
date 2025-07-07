@@ -13,5 +13,6 @@ public interface EmployeeServiceInt {
     public EmployeeResponse getAllEmployees();
     public EmployeeResponse getEmployeeById(String id);
     public EmployeeResponse updateEmployee(Employee employee);
+    public EmployeeResponse deleteEmployeeById(String id);
  
 }
