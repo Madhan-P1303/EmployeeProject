@@ -2,6 +2,7 @@ package com.example.employee.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,10 +29,11 @@ public class UserController {
     private PasswordValidator passwordValidator;
 
     @GetMapping("/profile")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('HR') or hasRole('USER')")
     public ResponseEntity<?> getUserProfile() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
-        
+
         User user = userRepository.findByUsername(username).orElse(null);
         if (user == null) {
             return ResponseEntity.badRequest().body("User not found");
@@ -50,10 +52,11 @@ public class UserController {
     }
 
     @PostMapping("/change-password")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('HR') or hasRole('USER')")
     public ResponseEntity<?> changePassword(@RequestBody ChangePasswordRequest request) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
-        
+
         User user = userRepository.findByUsername(username).orElse(null);
         if (user == null) {
             return ResponseEntity.badRequest().body("User not found");
